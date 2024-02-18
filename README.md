@@ -198,3 +198,169 @@ qjs >
 TODO: Print to Web Terminal
 
 TODO: [Add Blocks for POSIX Open and Close](https://github.com/lupyuen/nuttx-blockly/commit/801d019e11bf00ddfb6bf57361da9719b45e80ad)
+
+TODO: [Blockly Developer Tools](https://developers.google.com/blockly/guides/create-custom-blocks/blockly-developer-tools)
+
+```json
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "controls_repeat_ext",
+        "id": "0{4pA@{^=ks|iVF.|]i#",
+        "x": 74,
+        "y": 129,
+        "inputs": {
+          "TIMES": {
+            "shadow": {
+              "type": "math_number",
+              "id": "=o3{$E2c=BpwD0#MR3^x",
+              "fields": {
+                "NUM": 20
+              }
+            }
+          },
+          "DO": {
+            "block": {
+              "type": "variables_set",
+              "id": "Nx6o0xVxp@qzI_(vRd.7",
+              "fields": {
+                "VAR": {
+                  "id": ":,DB,f}1q3KOBim#j66["
+                }
+              },
+              "inputs": {
+                "VALUE": {
+                  "block": {
+                    "type": "math_number",
+                    "id": "enmYd`#z_G1k5Pvv*x(G",
+                    "fields": {
+                      "NUM": 7427
+                    }
+                  }
+                }
+              },
+              "next": {
+                "block": {
+                  "type": "variables_set",
+                  "id": "f#C+(eT=naKZzr%/;A.P",
+                  "fields": {
+                    "VAR": {
+                      "id": "A/TX@37C_h*^vbRp@1fz"
+                    }
+                  },
+                  "inputs": {
+                    "VALUE": {
+                      "block": {
+                        "type": "posix_open",
+                        "id": "{u;/3AFl^Rre}^VBbF00",
+                        "inputs": {
+                          "TEXT": {
+                            "shadow": {
+                              "type": "text",
+                              "id": "I,a@u9Ee$W9rhlQ~TV9#",
+                              "fields": {
+                                "TEXT": "/dev/userleds"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "next": {
+                    "block": {
+                      "type": "variables_set",
+                      "id": "l;AmIPhJARU{C)0kNq6`",
+                      "fields": {
+                        "VAR": {
+                          "id": "xH3`F~]tadlX:/zKQ!Xx"
+                        }
+                      },
+                      "inputs": {
+                        "VALUE": {
+                          "block": {
+                            "type": "posix_ioctl",
+                            "id": "43~Z.U.Z`#%=[l9RG!I]",
+                            "inputs": {
+                              "TEXT": {
+                                "block": {
+                                  "type": "variables_get",
+                                  "id": ".oBBiG}ko,6AK%1b!#`2",
+                                  "fields": {
+                                    "VAR": {
+                                      "id": "A/TX@37C_h*^vbRp@1fz"
+                                    }
+                                  }
+                                }
+                              },
+                              "TEXT2": {
+                                "block": {
+                                  "type": "variables_get",
+                                  "id": "S$NYy#(poiVFr)3c9y.A",
+                                  "fields": {
+                                    "VAR": {
+                                      "id": ":,DB,f}1q3KOBim#j66["
+                                    }
+                                  }
+                                }
+                              },
+                              "TEXT3": {
+                                "block": {
+                                  "type": "math_number",
+                                  "id": "AMrbu%xrU%db?R+%xA$y",
+                                  "fields": {
+                                    "NUM": 1
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "next": {
+                        "block": {
+                          "type": "posix_close",
+                          "id": "EC[Xwv%F4i0/(TKVDq[a",
+                          "inputs": {
+                            "TEXT": {
+                              "block": {
+                                "type": "variables_get",
+                                "id": "(g?H1/q8Lei7d0WHqv5)",
+                                "fields": {
+                                  "VAR": {
+                                    "id": "A/TX@37C_h*^vbRp@1fz"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "variables": [
+    {
+      "name": "fd",
+      "id": "A/TX@37C_h*^vbRp@1fz"
+    },
+    {
+      "name": "ULEDIOC_SETALL",
+      "id": ":,DB,f}1q3KOBim#j66["
+    },
+    {
+      "name": "ret",
+      "id": "xH3`F~]tadlX:/zKQ!Xx"
+    }
+  ]
+}
+```

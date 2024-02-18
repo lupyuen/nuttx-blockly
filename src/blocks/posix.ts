@@ -8,17 +8,12 @@ import * as Blockly from 'blockly/core';
 // POSIX Open Block
 const posixOpen = {
   'type': 'posix_open',
-  'message0': 'Open File %1 with color %2',
+  'message0': 'Open File %1',
   'args0': [
     {
       'type': 'input_value',
       'name': 'TEXT',
       'check': 'String',
-    },
-    {
-      'type': 'input_value',
-      'name': 'COLOR',
-      'check': 'Colour',
     },
   ],
   'previousStatement': null,
@@ -32,17 +27,12 @@ const posixOpen = {
 // POSIX Close Block
 const posixClose = {
     'type': 'posix_close',
-    'message0': 'Close File Descriptor %1 with color %2',
+    'message0': 'Close File Descriptor %1',
     'args0': [
       {
         'type': 'input_value',
         'name': 'TEXT',
-        'check': 'String',
-      },
-      {
-        'type': 'input_value',
-        'name': 'COLOR',
-        'check': 'Colour',
+        'check': 'Number',
       },
     ],
     'previousStatement': null,
@@ -55,17 +45,22 @@ const posixClose = {
 // POSIX Ioctl Block
 const posixIoctl = {
     'type': 'posix_ioctl',
-    'message0': 'IOCtl File Descriptor %1 with color %2',
+    'message0': 'IOCtl File Descriptor %1 Request %2 Arg %3',
     'args0': [
       {
         'type': 'input_value',
         'name': 'TEXT',
-        'check': 'String',
+        'check': 'Number',
       },
       {
         'type': 'input_value',
-        'name': 'COLOR',
-        'check': 'Colour',
+        'name': 'TEXT2',
+        'check': 'Number',
+      },
+      {
+        'type': 'input_value',
+        'name': 'TEXT3',
+        'check': 'Number',
       },
     ],
     'previousStatement': null,

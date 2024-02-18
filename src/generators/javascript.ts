@@ -43,12 +43,10 @@ forBlock['posix_open'] = function (
   generator: Blockly.CodeGenerator
 ) {
   const text = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
-  const color =
-    generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffffff'";
 
   // Generate the function call for this block.
   const code = `os.open(${text})`;
-  return [code, Order.NONE];
+  return [code, Order.ATOMIC];
 };
 
 // POSIX Close Block
@@ -57,8 +55,6 @@ forBlock['posix_close'] = function (
   generator: Blockly.CodeGenerator
 ) {
   const text = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
-  const color =
-    generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffffff'";
 
   // Generate the function call for this block.
   const code = `os.close(${text});\n`;
@@ -71,10 +67,8 @@ forBlock['posix_ioctl'] = function (
   generator: Blockly.CodeGenerator
 ) {
   const text = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
-  const color =
-    generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffffff'";
 
   // Generate the function call for this block.
   const code = `os.ioctl(${text})`;
-  return [code, Order.NONE];
+  return [code, Order.ATOMIC];
 };

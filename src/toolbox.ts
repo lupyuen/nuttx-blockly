@@ -526,15 +526,7 @@ export const toolbox = {
               'shadow': {
                 'type': 'text',
                 'fields': {
-                  'TEXT': 'abc',
-                },
-              },
-            },
-            'COLOR': {
-              'shadow': {
-                'type': 'colour_picker',
-                'fields': {
-                  'COLOUR': '#aa00cc',
+                  'TEXT': '/dev/userleds',
                 },
               },
             },
@@ -545,22 +537,6 @@ export const toolbox = {
           'kind': 'block',
           'type': 'posix_close',
           'inputs': {
-            'TEXT': {
-              'shadow': {
-                'type': 'text',
-                'fields': {
-                  'TEXT': 'abc',
-                },
-              },
-            },
-            'COLOR': {
-              'shadow': {
-                'type': 'colour_picker',
-                'fields': {
-                  'COLOUR': '#aa00cc',
-                },
-              },
-            },
           },
         },
         // POSIX Ioctl Block
@@ -568,22 +544,6 @@ export const toolbox = {
           'kind': 'block',
           'type': 'posix_ioctl',
           'inputs': {
-            'TEXT': {
-              'shadow': {
-                'type': 'text',
-                'fields': {
-                  'TEXT': 'abc',
-                },
-              },
-            },
-            'COLOR': {
-              'shadow': {
-                'type': 'colour_picker',
-                'fields': {
-                  'COLOUR': '#aa00cc',
-                },
-              },
-            },
           },
         },
       ],
