@@ -111,6 +111,7 @@ Which connects to Ox64 over UART: [jslinux.js](https://github.com/lupyuen/nuttx-
 
 ```javascript
 // Control Ox64 over UART
+// https://developer.chrome.com/docs/capabilities/serial
 async function control_device() {
     if (!navigator.serial) { const err = "Web Serial API only works with https://... and file://...!"; alert(err); throw new Error(err); }
 
