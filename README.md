@@ -41,4 +41,46 @@ npm run build
 
 Try the Blockly Demo: https://lupyuen.github.io/nuttx-blockly/
 
+# Send a Command to NuttX Emulator
+
+To send a command to NuttX Emulator: [jslinux.js](https://github.com/lupyuen/nuttx-tinyemu/commit/f01727935818cd1685ee4a82943bb9f19b13d85c)
+
+```javascript
+let send_str = "";
+function send_command(cmd) {
+  if (cmd !== null) { send_str = cmd; }
+  if (send_str.length == 0) { return; }
+  console_write1(send_str.charCodeAt(0));
+  send_str = send_str.substring(1);
+  window.setTimeout(()=>{ send_command(null); }, 10);
+}
+const cmd = [
+  `qjs`,
+  `function main() { console.log(123); }`,
+  `main()`,
+  ``
+].join("\r");
+window.setTimeout(()=>{ send_command(cmd); }, 10000);
+```
+
+Which will start QuickJS and run a JavaScript Function:
+
+https://lupyuen.github.io/nuttx-tinyemu/blockly/
+
+```text
+NuttShell (NSH) NuttX-12.4.0-RC0
+nsh> qjs
+QuickJS - Type "\h" for help
+qjs > function main() { console.log(123); }
+undefined
+qjs > main()
+123
+undefined
+qjs >
+```
+
+# Send a Command to Ox64 BL808 SBC via Web Serial API
+
+[Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API)
+
 TODO
