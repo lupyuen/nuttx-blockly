@@ -79,7 +79,9 @@ undefined
 qjs >
 ```
 
-# Send a Command to Ox64 BL808 SBC via Web Serial API
+# Connect to Ox64 BL808 SBC via Web Serial API
+
+Let's connect to Ox64 BL808 SBC in our Web Browser via the Web Serial API...
 
 - [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API)
 
@@ -88,5 +90,68 @@ qjs >
 - [Getting started with the Web Serial API](https://codelabs.developers.google.com/codelabs/web-serial#0)
 
   (Very similar to what we're doing)
+
+Beware, Web Serial API is only available...
+
+- Over HTTPS: https://...
+
+- Or Local Filesystem: file://...
+
+- It won't work over HTTP! http://...
+
+We create a button: [index.html](https://github.com/lupyuen/nuttx-tinyemu/commit/e5e74ac92d21d47c359dbabd4babcb0d59206408#diff-09992667561d80fbe8c76cc5e271739ba0bb8194b31341005f25d8aa3f6c2baf)
+
+```html
+<button id="connect" onclick="control_device();">
+  Connect
+</button>
+```
+
+Which connects to Ox64 over UART: [jslinux.js](https://github.com/lupyuen/nuttx-tinyemu/commit/e5e74ac92d21d47c359dbabd4babcb0d59206408#diff-0600645ce087613109d3c3269c8fa545477739eff19b7d478672b715500bb9cc)
+
+```javascript
+// Control Ox64 over UART
+async function control_device() {
+    if (!navigator.serial) { const err = "Web Serial API only works with https://... and file://...!"; alert(err); throw new Error(err); }
+
+    // Prompt user to select any serial port.
+    const port = await navigator.serial.requestPort();
+
+    // Get all serial ports the user has previously granted the website access to.
+    // const ports = await navigator.serial.getPorts();
+
+    // Wait for the serial port to open.
+    // TODO: Ox64 only connects at 2 Mbps, change this for other devices
+    await port.open({ baudRate: 2000000 });
+
+    // Read from the serial port
+    const textDecoder = new TextDecoderStream();
+    const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+    const reader = textDecoder.readable.getReader();
+
+    // Listen to data coming from the serial device.
+    while (true) {
+        const { value, done } = await reader.read();
+        if (done) {
+            // Allow the serial port to be closed later.
+            reader.releaseLock();
+            break;
+        }
+        // value is a string.
+        console.log(value);
+    }
+```
+
+And Ox64 NuttX appears in our JavaScript Console yay!
+
+```text
+Starting kernel ...
+ABC
+bl808_gpiowrite: regaddr=0x20000938, clear=0x1000000
+bl808_gpiowrite: regaddr=0x20000938, set=0x1000000
+bl808_gpiowrite: regaddr=0x20000938, clear=0x1000000
+NuttShell (NSH) NuttX-12.4.0-RC0
+nsh>
+```
 
 TODO
