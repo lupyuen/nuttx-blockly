@@ -47,7 +47,7 @@ forBlock['posix_open'] = function (
     generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffffff'";
 
   // Generate the function call for this block.
-  const code = `// os.open(${text});\n`;
+  const code = `os.open(${text});\n`;
   return code;
 };
 
@@ -61,7 +61,7 @@ forBlock['posix_close'] = function (
     generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffffff'";
 
   // Generate the function call for this block.
-  const code = `// os.close(${text});\n`;
+  const code = `os.close(${text});\n`;
   return code;
 };
 
@@ -75,6 +75,6 @@ forBlock['posix_ioctl'] = function (
     generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffffff'";
 
   // Generate the function call for this block.
-  const code = `// os.ioctl(${text});\n`;
+  const code = `os.ioctl(${text});\n`;
   return code;
 };

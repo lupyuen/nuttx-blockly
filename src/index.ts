@@ -33,7 +33,7 @@ const runCode = () => {
 
   if (outputDiv) outputDiv.innerHTML = '';
 
-  eval(code);
+  // eval(code);
 };
 
 if (ws) {
