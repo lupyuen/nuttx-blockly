@@ -201,6 +201,8 @@ TODO: [Add Blocks for POSIX Open and Close](https://github.com/lupyuen/nuttx-blo
 
 TODO: [Blockly Developer Tools](https://developers.google.com/blockly/guides/create-custom-blocks/blockly-developer-tools)
 
+TODO: [Change the Types from String to Number](https://github.com/lupyuen/nuttx-blockly/commit/e4405b39c59c3e5db35255fc7cb8ac25a29e66fe)
+
 ```json
 {
   "blocks": {
