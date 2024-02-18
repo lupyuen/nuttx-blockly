@@ -64,3 +64,17 @@ forBlock['posix_close'] = function (
   const code = `// os.close(${text});\n`;
   return code;
 };
+
+// POSIX Ioctl Block
+forBlock['posix_ioctl'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator
+) {
+  const text = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
+  const color =
+    generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffffff'";
+
+  // Generate the function call for this block.
+  const code = `// os.ioctl(${text});\n`;
+  return code;
+};

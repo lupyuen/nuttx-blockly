@@ -563,6 +563,29 @@ export const toolbox = {
             },
           },
         },
+        // POSIX Ioctl Block
+        {
+          'kind': 'block',
+          'type': 'posix_ioctl',
+          'inputs': {
+            'TEXT': {
+              'shadow': {
+                'type': 'text',
+                'fields': {
+                  'TEXT': 'abc',
+                },
+              },
+            },
+            'COLOR': {
+              'shadow': {
+                'type': 'colour_picker',
+                'fields': {
+                  'COLOUR': '#aa00cc',
+                },
+              },
+            },
+          },
+        },
       ],
     },
     {
