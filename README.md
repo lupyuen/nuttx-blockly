@@ -81,6 +81,12 @@ qjs >
 
 # Send a Command to Ox64 BL808 SBC via Web Serial API
 
-[Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API)
+- [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API)
+
+- [Read from and write to a serial port](https://developer.chrome.com/docs/capabilities/serial)
+
+- [Getting started with the Web Serial API](https://codelabs.developers.google.com/codelabs/web-serial#0)
+
+  (Very similar to what we're doing)
 
 TODO
