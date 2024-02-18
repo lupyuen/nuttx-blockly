@@ -517,6 +517,52 @@ export const toolbox = {
             },
           },
         },
+        // POSIX Open Block
+        {
+          'kind': 'block',
+          'type': 'posix_open',
+          'inputs': {
+            'TEXT': {
+              'shadow': {
+                'type': 'text',
+                'fields': {
+                  'TEXT': 'abc',
+                },
+              },
+            },
+            'COLOR': {
+              'shadow': {
+                'type': 'colour_picker',
+                'fields': {
+                  'COLOUR': '#aa00cc',
+                },
+              },
+            },
+          },
+        },
+        // POSIX Close Block
+        {
+          'kind': 'block',
+          'type': 'posix_close',
+          'inputs': {
+            'TEXT': {
+              'shadow': {
+                'type': 'text',
+                'fields': {
+                  'TEXT': 'abc',
+                },
+              },
+            },
+            'COLOR': {
+              'shadow': {
+                'type': 'colour_picker',
+                'fields': {
+                  'COLOUR': '#aa00cc',
+                },
+              },
+            },
+          },
+        },
       ],
     },
     {

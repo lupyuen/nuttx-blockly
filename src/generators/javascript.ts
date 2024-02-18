@@ -36,3 +36,31 @@ forBlock['add_text'] = function (
   const code = `${addText}(${text}, ${color});\n`;
   return code;
 };
+
+// POSIX Open Block
+forBlock['posix_open'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator
+) {
+  const text = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
+  const color =
+    generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffffff'";
+
+  // Generate the function call for this block.
+  const code = `// os.open(${text});\n`;
+  return code;
+};
+
+// POSIX Close Block
+forBlock['posix_close'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator
+) {
+  const text = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
+  const color =
+    generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffffff'";
+
+  // Generate the function call for this block.
+  const code = `// os.close(${text});\n`;
+  return code;
+};
