@@ -9,6 +9,7 @@ yarn-error.log*
 node_modules/
 
 # Generated files
+dist/
 build/
 .DS_Store
 
