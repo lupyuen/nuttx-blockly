@@ -154,4 +154,44 @@ NuttShell (NSH) NuttX-12.4.0-RC0
 nsh>
 ```
 
+# Send a Command to Ox64 BL808 SBC via Web Serial API
+
+This is how we send a command to Ox64 BL808 SBC via Web Serial API: [jslinux.js](https://github.com/lupyuen/nuttx-tinyemu/commit/1384db4edb398f6cb65718766af67dc1aa88bcb0)
+
+```javascript
+  // Wait for the serial port to open.
+  // TODO: Ox64 only connects at 2 Mbps, change this for other devices
+  await port.open({ baudRate: 2000000 });
+
+  // Send a command to serial port
+  const cmd = [
+      `qjs`,
+      `function main() { console.log(123); }`,
+      `main()`,
+      ``
+  ].join("\r");
+  const textEncoder = new TextEncoderStream();
+  const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
+  const writer = textEncoder.writable.getWriter();
+  await writer.write(cmd);
+  
+  // Read from the serial port
+  const textDecoder = new TextDecoderStream();
+  const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+  const reader = textDecoder.readable.getReader();
+
+  // Listen to data coming from the serial device.
+  ...
+```
+
+And it works! Says the JavaScript Console...
+
+```text
+function main() { console.log(123); }
+main()
+123
+undefined
+qjs >
+```
+
 TODO
