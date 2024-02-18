@@ -196,3 +196,5 @@ qjs >
 ```
 
 TODO: Print to Web Terminal
+
+TODO: [Add Blocks for POSIX Open and Close](https://github.com/lupyuen/nuttx-blockly/commit/801d019e11bf00ddfb6bf57361da9719b45e80ad)
