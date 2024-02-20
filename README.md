@@ -341,7 +341,7 @@ TODO: [Change the Types from String to Number](https://github.com/lupyuen/nuttx-
                                 "type": "math_number",
                                 "id": "9~q0@ABEg4VXP:1HN-$1",
                                 "fields": {
-                                  "NUM": 60000
+                                  "NUM": 20000
                                 }
                               }
                             }
@@ -406,7 +406,7 @@ TODO: [Change the Types from String to Number](https://github.com/lupyuen/nuttx-
                                         "type": "math_number",
                                         "id": "eEq(yXcGPbVtZT|CunT0",
                                         "fields": {
-                                          "NUM": 60000
+                                          "NUM": 20000
                                         }
                                       }
                                     }
