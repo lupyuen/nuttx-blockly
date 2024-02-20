@@ -546,6 +546,13 @@ export const toolbox = {
           'inputs': {
           },
         },
+        // POSIX Sleep Block
+        {
+          'kind': 'block',
+          'type': 'posix_sleep',
+          'inputs': {
+          },
+        },
       ],
     },
     {

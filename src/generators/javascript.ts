@@ -50,6 +50,19 @@ forBlock['posix_ioctl'] = function (
   return [code, Order.ATOMIC];
 };
 
+// POSIX Sleep Block
+forBlock['posix_sleep'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator
+) {
+  const ms = generator.valueToCode(block, 'MS', Order.NONE) || "''";
+
+  // Generate the function call for this block.
+  const code = `os.sleep(${ms});\n`;
+  return code;
+};
+
+// Demo: Add Text Block
 forBlock['add_text'] = function (
   block: Blockly.Block,
   generator: Blockly.CodeGenerator

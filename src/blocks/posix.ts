@@ -71,8 +71,27 @@ const posixIoctl = {
     'helpUrl': '',
 };
 
+// POSIX Sleep Block
+const posixSleep = {
+  'type': 'posix_sleep',
+  'message0': 'Sleep (ms) %1',
+  'args0': [
+    {
+      'type': 'input_value',
+      'name': 'MS',
+      'check': 'Number',
+    },
+  ],
+  'previousStatement': null,
+  'nextStatement': null,
+  'output': 'Number',
+  'colour': 160,
+  'tooltip': '',
+  'helpUrl': '',
+};
+
 // Create the block definitions for the JSON-only blocks.
 // This does not register their definitions with Blockly.
 // This file has no side effects!
 export const posixBlocks = Blockly.common.createBlockDefinitionsFromJsonArray(
-    [posixOpen, posixClose, posixIoctl]);
+    [posixOpen, posixClose, posixIoctl, posixSleep]);

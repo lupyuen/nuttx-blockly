@@ -327,16 +327,102 @@ TODO: [Change the Types from String to Number](https://github.com/lupyuen/nuttx-
                       },
                       "next": {
                         "block": {
-                          "type": "posix_close",
-                          "id": "EC[Xwv%F4i0/(TKVDq[a",
+                          "type": "posix_sleep",
+                          "id": "ruh/q4F7dW*CQ,5J]E%w",
                           "inputs": {
-                            "TEXT": {
+                            "MS": {
                               "block": {
-                                "type": "variables_get",
-                                "id": "(g?H1/q8Lei7d0WHqv5)",
+                                "type": "math_number",
+                                "id": "9~q0@ABEg4VXP:1HN-$1",
                                 "fields": {
-                                  "VAR": {
-                                    "id": "A/TX@37C_h*^vbRp@1fz"
+                                  "NUM": 60000
+                                }
+                              }
+                            }
+                          },
+                          "next": {
+                            "block": {
+                              "type": "variables_set",
+                              "id": "e;BNsjvbN}9vTTc[O#bY",
+                              "fields": {
+                                "VAR": {
+                                  "id": "xH3`F~]tadlX:/zKQ!Xx"
+                                }
+                              },
+                              "inputs": {
+                                "VALUE": {
+                                  "block": {
+                                    "type": "posix_ioctl",
+                                    "id": "-G5x~Y4iAyVUAWuwNh#H",
+                                    "inputs": {
+                                      "FD": {
+                                        "block": {
+                                          "type": "variables_get",
+                                          "id": "vtt5Gid0B|iK![$4Ct*D",
+                                          "fields": {
+                                            "VAR": {
+                                              "id": "A/TX@37C_h*^vbRp@1fz"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "REQ": {
+                                        "block": {
+                                          "type": "variables_get",
+                                          "id": "pd~f}Oqz2(`o3Oz;8ax`",
+                                          "fields": {
+                                            "VAR": {
+                                              "id": ":,DB,f}1q3KOBim#j66["
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "ARG": {
+                                        "block": {
+                                          "type": "math_number",
+                                          "id": "OS(uQV)!%iqZ=N}s1H(L",
+                                          "fields": {
+                                            "NUM": 0
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "next": {
+                                "block": {
+                                  "type": "posix_sleep",
+                                  "id": "{X9leD=Rgr4=o5E2(#Z,",
+                                  "inputs": {
+                                    "MS": {
+                                      "block": {
+                                        "type": "math_number",
+                                        "id": "eEq(yXcGPbVtZT|CunT0",
+                                        "fields": {
+                                          "NUM": 60000
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "next": {
+                                    "block": {
+                                      "type": "posix_close",
+                                      "id": "EC[Xwv%F4i0/(TKVDq[a",
+                                      "inputs": {
+                                        "TEXT": {
+                                          "block": {
+                                            "type": "variables_get",
+                                            "id": "(g?H1/q8Lei7d0WHqv5)",
+                                            "fields": {
+                                              "VAR": {
+                                                "id": "A/TX@37C_h*^vbRp@1fz"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
                                   }
                                 }
                               }
