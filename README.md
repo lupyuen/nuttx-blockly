@@ -113,7 +113,7 @@ Click this link: https://lupyuen.github.io/nuttx-blockly/
 
 Then Drag-n-Drop this NuttX App...
 
-TODO: Watch the Demo on YouTube
+[(Watch the Demo on YouTube)](https://youtu.be/-dG5ZSXELDc)
 
 ```javascript
 var ULEDIOC_SETALL, fd, ret;
@@ -158,7 +158,7 @@ bl808_gpiowrite: regaddr=0x20000938, clear=0x1000000
 
 ![Running our Drag-n-Drop App on NuttX Emulator](https://lupyuen.github.io/images/quickjs2-emulator.png)
 
-_How did Blockly pass the JavaScript to NuttX Emulator?_
+_How did Blockly pass the Generated JavaScript to NuttX Emulator?_
 
 When we click the "Run on Emulator" button, our Blockly Website saves the Generated JavaScript to the Web Browser Local Storage: [index.ts](https://github.com/lupyuen/nuttx-blockly/blob/main/src/index.ts#L72-L78)
 
