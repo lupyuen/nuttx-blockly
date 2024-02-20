@@ -17,6 +17,57 @@ export const toolbox = {
   'contents': [
     {
       'kind': 'category',
+      'name': 'POSIX',
+      'categorystyle': 'text_category',
+      'contents': [
+        // POSIX Open Block
+        {
+          'kind': 'block',
+          'type': 'posix_open',
+          'inputs': {
+            'TEXT': {
+              'shadow': {
+                'type': 'text',
+                'fields': {
+                  'TEXT': '/dev/userleds',
+                },
+              },
+            },
+          },
+        },
+        // POSIX Close Block
+        {
+          'kind': 'block',
+          'type': 'posix_close',
+          'inputs': {
+          },
+        },
+        // POSIX Ioctl Block
+        {
+          'kind': 'block',
+          'type': 'posix_ioctl',
+          'inputs': {
+          },
+        },
+        // POSIX Sleep Block
+        {
+          'kind': 'block',
+          'type': 'posix_sleep',
+          'inputs': {
+            'MS': {
+              'shadow': {
+                'type': 'math_number',
+                'fields': {
+                  'NUM': 20000,
+                },
+              },
+            },
+          },
+        },
+      ],
+    },
+    {
+      'kind': 'category',
       'name': 'Logic',
       'categorystyle': 'logic_category',
       'contents': [
@@ -515,42 +566,6 @@ export const toolbox = {
                 },
               },
             },
-          },
-        },
-        // POSIX Open Block
-        {
-          'kind': 'block',
-          'type': 'posix_open',
-          'inputs': {
-            'TEXT': {
-              'shadow': {
-                'type': 'text',
-                'fields': {
-                  'TEXT': '/dev/userleds',
-                },
-              },
-            },
-          },
-        },
-        // POSIX Close Block
-        {
-          'kind': 'block',
-          'type': 'posix_close',
-          'inputs': {
-          },
-        },
-        // POSIX Ioctl Block
-        {
-          'kind': 'block',
-          'type': 'posix_ioctl',
-          'inputs': {
-          },
-        },
-        // POSIX Sleep Block
-        {
-          'kind': 'block',
-          'type': 'posix_sleep',
-          'inputs': {
           },
         },
       ],
