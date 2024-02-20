@@ -71,6 +71,9 @@ if (ws) {
 
 function runEmulator() {
   // TODO: Save JavaScript Code to LocalStorage
+  const code = javascriptGenerator.workspaceToCode(ws);
+  window.localStorage.setItem("runTimestamp", Date.now() + "");
+  window.localStorage.setItem("runCode", code);
   window.open("https://lupyuen.github.io/nuttx-tinyemu/blockly/", "Emulator");
 }
 
