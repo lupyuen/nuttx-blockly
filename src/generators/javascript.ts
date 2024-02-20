@@ -17,7 +17,7 @@ forBlock['posix_open'] = function (
   block: Blockly.Block,
   generator: Blockly.CodeGenerator
 ) {
-  const text = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
+  const text = generator.valueToCode(block, 'FILENAME', Order.NONE) || "''";
 
   // Generate the function call for this block.
   const code = `os.open(${text})`;
@@ -29,7 +29,7 @@ forBlock['posix_close'] = function (
   block: Blockly.Block,
   generator: Blockly.CodeGenerator
 ) {
-  const text = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
+  const text = generator.valueToCode(block, 'FD', Order.NONE) || "0";
 
   // Generate the function call for this block.
   const code = `os.close(${text});\n`;

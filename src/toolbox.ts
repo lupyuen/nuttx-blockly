@@ -25,7 +25,7 @@ export const toolbox = {
           'kind': 'block',
           'type': 'posix_open',
           'inputs': {
-            'TEXT': {
+            'FILENAME': {
               'shadow': {
                 'type': 'text',
                 'fields': {

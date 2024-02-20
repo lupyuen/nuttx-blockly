@@ -8,11 +8,11 @@ import * as Blockly from 'blockly/core';
 // POSIX Open Block
 const posixOpen = {
   'type': 'posix_open',
-  'message0': 'Open File %1',
+  'message0': 'Open Filename %1',
   'args0': [
     {
       'type': 'input_value',
-      'name': 'TEXT',
+      'name': 'FILENAME',
       'check': 'String',
     },
   ],
@@ -31,7 +31,7 @@ const posixClose = {
     'args0': [
       {
         'type': 'input_value',
-        'name': 'TEXT',
+        'name': 'FD',
         'check': 'Number',
       },
     ],
