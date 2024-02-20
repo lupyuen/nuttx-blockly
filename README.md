@@ -288,12 +288,12 @@ TODO: [Change the Types from String to Number](https://github.com/lupyuen/nuttx-
                         "VALUE": {
                           "block": {
                             "type": "posix_ioctl",
-                            "id": "43~Z.U.Z`#%=[l9RG!I]",
+                            "id": "0i!pbWJ(~f~)b^@jt!nP",
                             "inputs": {
-                              "TEXT": {
+                              "FD": {
                                 "block": {
                                   "type": "variables_get",
-                                  "id": ".oBBiG}ko,6AK%1b!#`2",
+                                  "id": "QMGa_}UmC$b[5/Bh^f${",
                                   "fields": {
                                     "VAR": {
                                       "id": "A/TX@37C_h*^vbRp@1fz"
@@ -301,10 +301,10 @@ TODO: [Change the Types from String to Number](https://github.com/lupyuen/nuttx-
                                   }
                                 }
                               },
-                              "TEXT2": {
+                              "REQ": {
                                 "block": {
                                   "type": "variables_get",
-                                  "id": "S$NYy#(poiVFr)3c9y.A",
+                                  "id": "dZ5%B_rcbVb_o=v;gze-",
                                   "fields": {
                                     "VAR": {
                                       "id": ":,DB,f}1q3KOBim#j66["
@@ -312,10 +312,10 @@ TODO: [Change the Types from String to Number](https://github.com/lupyuen/nuttx-
                                   }
                                 }
                               },
-                              "TEXT3": {
+                              "ARG": {
                                 "block": {
                                   "type": "math_number",
-                                  "id": "AMrbu%xrU%db?R+%xA$y",
+                                  "id": "9UA!sDxmf/=fYfxC6Yqa",
                                   "fields": {
                                     "NUM": 1
                                   }

@@ -12,31 +12,6 @@ import * as Blockly from 'blockly/core';
 // This file has no side effects!
 export const forBlock = Object.create(null);
 
-forBlock['add_text'] = function (
-  block: Blockly.Block,
-  generator: Blockly.CodeGenerator
-) {
-  const text = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
-  const color =
-    generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffffff'";
-
-  const addText = generator.provideFunction_(
-    'addText',
-    `function ${generator.FUNCTION_NAME_PLACEHOLDER_}(text, color) {
-
-  // Add text to the output area.
-  const outputDiv = document.getElementById('output');
-  const textEl = document.createElement('p');
-  textEl.innerText = text;
-  textEl.style.color = color;
-  outputDiv.appendChild(textEl);
-}`
-  );
-  // Generate the function call for this block.
-  const code = `${addText}(${text}, ${color});\n`;
-  return code;
-};
-
 // POSIX Open Block
 forBlock['posix_open'] = function (
   block: Blockly.Block,
@@ -66,9 +41,36 @@ forBlock['posix_ioctl'] = function (
   block: Blockly.Block,
   generator: Blockly.CodeGenerator
 ) {
-  const text = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
+  const fd = generator.valueToCode(block, 'FD', Order.NONE) || "0";
+  const req = generator.valueToCode(block, 'REQ', Order.NONE) || "0";
+  const arg = generator.valueToCode(block, 'ARG', Order.NONE) || "0";
 
   // Generate the function call for this block.
-  const code = `os.ioctl(${text})`;
+  const code = `os.ioctl(${fd}, ${req}, ${arg})`;
   return [code, Order.ATOMIC];
+};
+
+forBlock['add_text'] = function (
+  block: Blockly.Block,
+  generator: Blockly.CodeGenerator
+) {
+  const text = generator.valueToCode(block, 'TEXT', Order.NONE) || "''";
+  const color =
+    generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffffff'";
+
+  const addText = generator.provideFunction_(
+    'addText',
+    `function ${generator.FUNCTION_NAME_PLACEHOLDER_}(text, color) {
+
+  // Add text to the output area.
+  const outputDiv = document.getElementById('output');
+  const textEl = document.createElement('p');
+  textEl.innerText = text;
+  textEl.style.color = color;
+  outputDiv.appendChild(textEl);
+}`
+  );
+  // Generate the function call for this block.
+  const code = `${addText}(${text}, ${color});\n`;
+  return code;
 };

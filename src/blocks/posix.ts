@@ -49,17 +49,17 @@ const posixIoctl = {
     'args0': [
       {
         'type': 'input_value',
-        'name': 'TEXT',
+        'name': 'FD',
         'check': 'Number',
       },
       {
         'type': 'input_value',
-        'name': 'TEXT2',
+        'name': 'REQ',
         'check': 'Number',
       },
       {
         'type': 'input_value',
-        'name': 'TEXT3',
+        'name': 'ARG',
         'check': 'Number',
       },
     ],
