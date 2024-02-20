@@ -61,4 +61,20 @@ if (ws) {
     }
     runCode();
   });
+
+  // Add callbacks for buttons
+  const emulatorBtn = document.getElementById("emulatorBtn");
+  const deviceBtn = document.getElementById("deviceBtn");
+  if (emulatorBtn) { emulatorBtn.onclick = runEmulator; }
+  if (deviceBtn) { deviceBtn.onclick = runDevice; }
+}
+
+function runEmulator() {
+  // TODO: Save JavaScript Code to LocalStorage
+  window.open("https://lupyuen.github.io/nuttx-tinyemu/blockly/", "Emulator");
+}
+
+function runDevice() {
+  // TODO: Save JavaScript Code to LocalStorage
+  window.open("https://lupyuen.github.io/nuttx-tinyemu/blockly/", "Device");
 }
