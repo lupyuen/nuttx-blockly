@@ -543,6 +543,19 @@ export declare const toolbox: {
                 FROM?: undefined;
                 TO?: undefined;
             };
+        } | {
+            kind: string;
+            type: string;
+            inputs: {
+                TEXT?: undefined;
+                VALUE?: undefined;
+                FIND?: undefined;
+                STRING?: undefined;
+                SUB?: undefined;
+                FROM?: undefined;
+                TO?: undefined;
+                COLOR?: undefined;
+            };
         })[];
         custom?: undefined;
     } | {
