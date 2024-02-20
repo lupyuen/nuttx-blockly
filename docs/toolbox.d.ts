@@ -13,6 +13,47 @@ export declare const toolbox: {
             kind: string;
             type: string;
             inputs: {
+                FILENAME: {
+                    shadow: {
+                        type: string;
+                        fields: {
+                            TEXT: string;
+                        };
+                    };
+                };
+                MS?: undefined;
+            };
+        } | {
+            kind: string;
+            type: string;
+            inputs: {
+                FILENAME?: undefined;
+                MS?: undefined;
+            };
+        } | {
+            kind: string;
+            type: string;
+            inputs: {
+                MS: {
+                    shadow: {
+                        type: string;
+                        fields: {
+                            NUM: number;
+                        };
+                    };
+                };
+                FILENAME?: undefined;
+            };
+        })[];
+        custom?: undefined;
+    } | {
+        kind: string;
+        name: string;
+        categorystyle: string;
+        contents: ({
+            kind: string;
+            type: string;
+            inputs: {
                 TIMES: {
                     shadow: {
                         type: string;
@@ -542,19 +583,6 @@ export declare const toolbox: {
                 SUB?: undefined;
                 FROM?: undefined;
                 TO?: undefined;
-            };
-        } | {
-            kind: string;
-            type: string;
-            inputs: {
-                TEXT?: undefined;
-                VALUE?: undefined;
-                FIND?: undefined;
-                STRING?: undefined;
-                SUB?: undefined;
-                FROM?: undefined;
-                TO?: undefined;
-                COLOR?: undefined;
             };
         })[];
         custom?: undefined;
