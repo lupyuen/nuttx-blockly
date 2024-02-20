@@ -1,3 +1,5 @@
+![(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way](https://lupyuen.github.io/images/quickjs2-blockly.png)
+
 # (Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way
 
 [MakeCode for BBC micro:bit](https://www.sciencedirect.com/science/article/pii/S1383762118306088) is an awesome creation that's way ahead of its time (7 years ago!)
@@ -27,6 +29,8 @@ Today 7 years later: How would we redo all this? With a bunch of Open Source Pac
 - C Compiler + Assembler: [TCC WebAssembly for NuttX](https://github.com/lupyuen/tcc-riscv32-wasm) (but we probably won't need this since we have JavaScript on NuttX)
 
 - Device Control: [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API) for controlling Ox64 over UART
+
+![Running our Drag-n-Drop App on NuttX Emulator](https://lupyuen.github.io/images/quickjs2-emulator.png)
 
 # Create the Blockly Project
 
@@ -77,6 +81,123 @@ qjs > main()
 123
 undefined
 qjs >
+```
+
+# Add POSIX Blocks to Blockly
+
+Based on the [Blockly Developer Tools](https://developers.google.com/blockly/guides/create-custom-blocks/blockly-developer-tools), we add the POSIX Blocks for `open()`, `close()`, `ioctl()` and `sleep()`...
+
+1.  [Add Blocks for POSIX Open and Close](https://github.com/lupyuen/nuttx-blockly/commit/801d019e11bf00ddfb6bf57361da9719b45e80ad)
+
+1.  [Add POSIX ioctl block](https://github.com/lupyuen/nuttx-blockly/commit/29e060a883ba4d2a257f7c9c65ef88a6f5eb95a4)
+
+1.  [Add POSIX sleep block](https://github.com/lupyuen/nuttx-blockly/commit/43d892c8520837b88d881ac631f15e741fc9fd87)
+
+1.  [Change the Types from String to Number](https://github.com/lupyuen/nuttx-blockly/commit/e4405b39c59c3e5db35255fc7cb8ac25a29e66fe)
+
+1.  [Clean up parameter names](https://github.com/lupyuen/nuttx-blockly/commit/f823607b63bb69b98791c0c089d036c56700f543)
+
+1.  [Create POSIX Category in Toolbox](https://github.com/lupyuen/nuttx-blockly/commit/838e1d0d872808a341b281a70ae64229cbe1a079)
+
+Then we build and deploy our Blockly Website...
+
+```bash
+npm run build && rm -r docs && mv dist docs
+```
+
+Let's test it...
+
+# Drag-n-Drop a NuttX App for Ox64 BL808
+
+Click this link: https://lupyuen.github.io/nuttx-blockly/
+
+Then Drag-n-Drop this NuttX App...
+
+TODO: Watch the Demo on YouTube
+
+```javascript
+var ULEDIOC_SETALL, fd, ret;
+ULEDIOC_SETALL = 7427;
+fd = os.open('/dev/userleds');
+for (var count = 0; count < 20; count++) {
+  ret = os.ioctl(fd, ULEDIOC_SETALL, 1);
+  os.sleep(20000);
+  ret = os.ioctl(fd, ULEDIOC_SETALL, 0);
+  os.sleep(20000);
+}
+os.close(fd);
+```
+
+![(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way](https://lupyuen.github.io/images/quickjs2-blockly.png)
+
+Click the "Run on Ox64 Emulator" button.
+
+Our Drag-n-Drop NuttX App runs automatically in the Emulator yay!
+
+```text
+NuttShell (NSH) NuttX-12.4.0-RC0
+nsh> qjs
+QuickJS - Type "\h" for help
+qjs > var ULEDIOC_SETALL, fd, ret;
+undefined
+qjs >
+qjs >
+qjs > ULEDIOC_SETALL = 7427;
+7427
+qjs > fd = os.open('/dev/userleds');
+3
+qjs > for (var count = 0; count < 20; count++) {
+{  ...       ret = os.ioctl(fd, ULEDIOC_SETALL, 1);
+{  ...       os.sleep(20000);
+{  ...       ret = os.ioctl(fd, ULEDIOC_SETALL, 0);
+{  ...       os.sleep(20000);
+{  ...     }
+bl808_gpiowrite: regaddr=0x20000938, set=0x1000000
+bl808_gpiowrite: regaddr=0x20000938, clear=0x1000000
+```
+
+![Running our Drag-n-Drop App on NuttX Emulator](https://lupyuen.github.io/images/quickjs2-emulator.png)
+
+_How did Blockly pass the JavaScript to NuttX Emulator?_
+
+When we click the "Run on Emulator" button, our Blockly Website saves the Generated JavaScript to the Web Browser Local Storage: [index.ts](https://github.com/lupyuen/nuttx-blockly/blob/main/src/index.ts#L72-L78)
+
+```javascript
+function runEmulator() {
+  // Save the Generated JavaScript Code to LocalStorage
+  const code = javascriptGenerator.workspaceToCode(ws);
+  window.localStorage.setItem("runCode", code);
+
+  // Set the Timestamp for Optimistic Locking (later)
+  window.localStorage.setItem("runTimestamp", Date.now() + "");
+
+  // Open the NuttX Emulator. Reuse the same tab.
+  window.open("https://lupyuen.github.io/nuttx-tinyemu/blockly/", "Emulator");
+}
+```
+
+In the NuttX Emulator: We read the Generated JavaScript from the Web Browser Local Storage. And feed it (character by character) to the NuttX Console: [jslinux.js](https://github.com/lupyuen/nuttx-tinyemu/commit/85fb2b85ae85cd27b7623d937c4420a1d2bdd45c)
+
+```javascript
+// QuickJS Command to be sent
+const cmd = [
+  `qjs`,
+  window.localStorage.getItem("runCode"),
+  ``
+].join("\r");
+
+// Wait for NuttX to boot in 5 seconds. Then send the QuickJS Command.
+window.setTimeout(()=>{ send_command(cmd); }, 5000);
+
+// Send a Command to NuttX Console, character by character
+let send_str = "";
+function send_command(cmd) {
+  if (cmd !== null) { send_str = cmd; }
+  if (send_str.length == 0) { return; }
+  console_write1(send_str.charCodeAt(0));
+  send_str = send_str.substring(1);
+  window.setTimeout(()=>{ send_command(null); }, 10);
+}
 ```
 
 # Connect to Ox64 BL808 SBC via Web Serial API
@@ -195,23 +316,19 @@ undefined
 qjs >
 ```
 
-TODO: Build and Deploy
-
-```bash
-npm run build && rm -r docs && mv dist docs
-```
-
 TODO: Print to Web Terminal
 
-TODO: [Add Blocks for POSIX Open and Close](https://github.com/lupyuen/nuttx-blockly/commit/801d019e11bf00ddfb6bf57361da9719b45e80ad)
+# JSON for Blockly App
 
-TODO: [Add ioctl block](https://github.com/lupyuen/nuttx-blockly/commit/29e060a883ba4d2a257f7c9c65ef88a6f5eb95a4)
+To paste the Blockly App, browse to https://lupyuen.github.io/nuttx-blockly/
 
-TODO: [Change the Types from String to Number](https://github.com/lupyuen/nuttx-blockly/commit/e4405b39c59c3e5db35255fc7cb8ac25a29e66fe)
+Then open JavaScript Console and execute...
 
-TODO: [Blockly Developer Tools](https://developers.google.com/blockly/guides/create-custom-blocks/blockly-developer-tools)
+```javascript
+localStorage.setItem("mainWorkspace", `...`)
+```
 
-TODO: [Change the Types from String to Number](https://github.com/lupyuen/nuttx-blockly/commit/e4405b39c59c3e5db35255fc7cb8ac25a29e66fe)
+Change `...` to this...
 
 ```json
 {

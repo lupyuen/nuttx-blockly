@@ -70,10 +70,14 @@ if (ws) {
 }
 
 function runEmulator() {
-  // TODO: Save JavaScript Code to LocalStorage
+  // Save the Generated JavaScript Code to LocalStorage
   const code = javascriptGenerator.workspaceToCode(ws);
-  window.localStorage.setItem("runTimestamp", Date.now() + "");
   window.localStorage.setItem("runCode", code);
+
+  // Set the Timestamp for Optimistic Locking (later)
+  window.localStorage.setItem("runTimestamp", Date.now() + "");
+
+  // Open the NuttX Emulator. Reuse the same tab.
   window.open("https://lupyuen.github.io/nuttx-tinyemu/blockly/", "Emulator");
 }
 
