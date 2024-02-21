@@ -91,6 +91,6 @@ function runDevice() {
   // Set the Timestamp for Optimistic Locking (later)
   window.localStorage.setItem("runTimestamp", Date.now() + "");
 
-  // Open the NuttX Emulator. Reuse the same tab.
+  // Open the WebSerial Monitor. Reuse the same tab.
   window.open("https://lupyuen.github.io/nuttx-tinyemu/webserial/", "Device");
 }

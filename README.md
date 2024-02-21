@@ -200,6 +200,169 @@ function send_command(cmd) {
 }
 ```
 
+# Drag-n-Drop a NuttX App to a Real Ox64 BL808 SBC
+
+From NuttX Emulator to a Real NuttX Device! Click this link: https://lupyuen.github.io/nuttx-blockly/
+
+Then Drag-n-Drop the same NuttX App (see the previous section)...
+
+```javascript
+var ULEDIOC_SETALL, fd, ret;
+ULEDIOC_SETALL = 7427;
+fd = os.open('/dev/userleds');
+for (var count = 0; count < 20; count++) {
+  ret = os.ioctl(fd, ULEDIOC_SETALL, 1);
+  os.sleep(20000);
+  ret = os.ioctl(fd, ULEDIOC_SETALL, 0);
+  os.sleep(20000);
+}
+os.close(fd);
+```
+
+![(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way](https://lupyuen.github.io/images/quickjs2-blockly.png)
+
+1.  Click the "Run on Ox64 Device" button
+
+1.  Click the "Connect" button to connect to our Ox64 BL808 SBC
+
+1.  Power on our Ox64 SBC. The Web App waits for the "nsh>" prompt.
+
+1.  Then our Drag-n-Drop NuttX App runs automatically on a Real Ox64 BL808 SBC yay!
+
+TODO: Watch the Demo on YouTube
+
+```text
+NuttShell (NSH) NuttX-12.4.0-RC0
+nsh> qjs
+QuickJS - Type "\h" for help
+qjs > var ULEDIOC_SETALL, fd, ret;
+undefined
+qjs >
+qjs >
+qjs > ULEDIOC_SETALL = 7427;
+7427
+qjs > fd = os.open('/dev/userleds');
+3
+qjs > for (var count = 0; count < 20; count++) {
+{  ...       ret = os.ioctl(fd, ULEDIOC_SETALL, 1);
+{  ...       os.sleep(20000);
+{  ...       ret = os.ioctl(fd, ULEDIOC_SETALL, 0);
+{  ...       os.sleep(20000);
+{  ...     }
+bl808_gpiowrite: regaddr=0x20000938, set=0x1000000
+bl808_gpiowrite: regaddr=0x20000938, clear=0x1000000
+```
+
+![Running our Drag-n-Drop App on Ox64 BL808 SBC](https://lupyuen.github.io/images/quickjs2-device.png)
+
+_How did Blockly pass the Generated JavaScript to Ox64 SBC?_
+
+When we click the "Run on Device" button, our Blockly Website saves the Generated JavaScript to the Web Browser Local Storage: [index.ts](https://github.com/lupyuen/nuttx-blockly/blob/main/src/index.ts#L84-L96)
+
+```javascript
+// Run on Ox64 Device
+function runDevice() {
+  // Save the Generated JavaScript Code to LocalStorage
+  const code = javascriptGenerator.workspaceToCode(ws);
+  window.localStorage.setItem("runCode", code);
+
+  // Set the Timestamp for Optimistic Locking (later)
+  window.localStorage.setItem("runTimestamp", Date.now() + "");
+
+  // Open the WebSerial Monitor. Reuse the same tab.
+  window.open("https://lupyuen.github.io/nuttx-tinyemu/webserial/", "Device");
+}
+```
+
+In the WebSerial Monitor: We read the Generated JavaScript from the Web Browser Local Storage. And feed it (character by character) to the NuttX Console: [webserial.js](https://github.com/lupyuen/nuttx-tinyemu/blob/main/docs/webserial/webserial.js#L612-L694)
+
+```javascript
+// Control Ox64 over UART
+// https://developer.chrome.com/docs/capabilities/serial
+async function control_device() {
+    if (!navigator.serial) { const err = "Web Serial API only works with https://... and file://...!"; alert(err); throw new Error(err); }
+
+    // Prompt user to select any serial port.
+    const port = await navigator.serial.requestPort();
+    term.write("Power on our NuttX Device and we'll wait for \"nsh>\"\r\n");
+
+    // Get all serial ports the user has previously granted the website access to.
+    // const ports = await navigator.serial.getPorts();
+
+    // Wait for the serial port to open.
+    // TODO: Ox64 only connects at 2 Mbps, change this for other devices
+    await port.open({ baudRate: 2000000 });
+
+    // Prepare to write to serial port
+    const textEncoder = new TextEncoderStream();
+    const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
+    const writer = textEncoder.writable.getWriter();
+    
+    // Read from the serial port
+    const textDecoder = new TextDecoderStream();
+    const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+    const reader = textDecoder.readable.getReader();
+
+    // Wait for "nsh>"
+    let nshSpotted = false;
+    let termBuffer = "";
+
+    // Listen to data coming from the serial device.
+    while (true) {
+        const { value, done } = await reader.read();
+        if (done) {
+            // Allow the serial port to be closed later.
+            reader.releaseLock();
+            break;
+        }
+        // Print to the Terminal
+        term.write(value);
+        // console.log(value);
+
+        // Wait for "nsh>"
+        if (nshSpotted) { continue; }
+        termBuffer += value;
+        if (termBuffer.indexOf("nsh>") < 0) { continue; }
+
+        // NSH Spotted!
+        console.log("NSH Spotted!");
+        nshSpotted = true;
+
+        // Send a command to serial port. Newlines become Carriage Returns.
+        const code = window.localStorage.getItem("runCode")
+            .split('\n').join('\r');
+        const cmd = [
+            `qjs`,
+            code,
+            ``
+        ].join("\r");
+        window.setTimeout(()=>{ send_command(writer, cmd); }, 1000);
+    }
+}
+
+// Send a Command to serial port, character by character
+let send_str = "";
+async function send_command(writer, cmd) {
+    if (cmd !== null) { send_str = cmd; }
+    if (send_str.length == 0) { return; }
+
+    // Get the next character
+    const ch = send_str.substring(0, 1);
+    send_str = send_str.substring(1);
+
+    // Slow down at the end of each line
+    const timeout = (ch === "\r")
+        ? 3000
+        : 10;
+
+    // Send the character
+    await writer.write(ch);
+    window.setTimeout(()=>{ send_command(writer, null); }, timeout);
+}
+```
+
+More about the Web Serial API...
+
 # Connect to Ox64 BL808 SBC via Web Serial API
 
 Let's connect to Ox64 BL808 SBC in our Web Browser via the Web Serial API...
