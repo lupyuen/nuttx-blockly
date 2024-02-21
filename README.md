@@ -229,7 +229,7 @@ os.close(fd);
 
 1.  Then our Drag-n-Drop NuttX App runs automatically on a Real Ox64 BL808 SBC yay!
 
-TODO: Watch the Demo on YouTube
+[(Watch the Demo on YouTube)](https://youtu.be/lUhrLWvwizU)
 
 ```text
 NuttShell (NSH) NuttX-12.4.0-RC0
