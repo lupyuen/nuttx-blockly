@@ -479,19 +479,13 @@ undefined
 qjs >
 ```
 
-TODO: Print to Web Terminal
-
 # JSON for Blockly App
 
 To paste the Blockly App, browse to https://lupyuen.github.io/nuttx-blockly/
 
-Then open JavaScript Console and execute...
+Select "Menu > More Tools > Developer Tools > Application > Local Storage > lupyuen.github.io > mainWorkspace"
 
-```javascript
-localStorage.setItem("mainWorkspace", `...`)
-```
-
-Change `...` to this...
+Set the Value to...
 
 ```json
 {
@@ -742,3 +736,11 @@ Change `...` to this...
     ]
 }
 ```
+
+Or open JavaScript Console and execute...
+
+```javascript
+localStorage.setItem("mainWorkspace", `...`)
+```
+
+Change `...` to the above JSON.
