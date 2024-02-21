@@ -34,7 +34,7 @@ Today 7 years later: How would we redo all this? With a bunch of Open Source Pac
 
 ![Blockly App Builder with NuttX](https://lupyuen.github.io/images/quickjs2-nuttx.jpg)
 
-Which will looks like this...
+Which will look like this...
 
 ![Running our Drag-n-Drop App on NuttX Emulator](https://lupyuen.github.io/images/quickjs2-emulator.png)
 
