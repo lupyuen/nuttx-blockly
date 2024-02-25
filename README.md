@@ -2,6 +2,10 @@
 
 # (Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way
 
+Read the article...
+
+-   ["(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way"](https://lupyuen.github.io/articles/quickjs2)
+
 [MakeCode for BBC micro:bit](https://www.sciencedirect.com/science/article/pii/S1383762118306088) is an awesome creation that's way ahead of its time (7 years ago!)
 
 - [TypeScript Compiler](https://www.sciencedirect.com/science/article/pii/S1383762118306088#sec0008) in the Web Browser (in JavaScript!)
@@ -40,6 +44,10 @@ Which will look like this...
 
 # Create the Blockly Project
 
+Read the article...
+
+-   ["(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way"](https://lupyuen.github.io/articles/quickjs2)
+
 MakeCode was created with Blockly, we'll stick with Blockly.
 
 Based on the [Blockly Instructions](https://developers.google.com/blockly/guides/get-started/get-the-code)...
@@ -52,6 +60,10 @@ npm run build
 Try the Blockly Demo: https://lupyuen.github.io/nuttx-blockly/
 
 # Send a Command to NuttX Emulator
+
+Read the article...
+
+-   ["(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way"](https://lupyuen.github.io/articles/quickjs2)
 
 To send a command to NuttX Emulator: [jslinux.js](https://github.com/lupyuen/nuttx-tinyemu/commit/f01727935818cd1685ee4a82943bb9f19b13d85c)
 
@@ -91,6 +103,10 @@ qjs >
 
 # Add POSIX Blocks to Blockly
 
+Read the article...
+
+-   ["(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way"](https://lupyuen.github.io/articles/quickjs2)
+
 Based on the [Blockly Developer Tools](https://developers.google.com/blockly/guides/create-custom-blocks/blockly-developer-tools), we add the POSIX Blocks for `open()`, `close()`, `ioctl()` and `sleep()`...
 
 1.  [Add Blocks for POSIX Open and Close](https://github.com/lupyuen/nuttx-blockly/commit/801d019e11bf00ddfb6bf57361da9719b45e80ad)
@@ -114,6 +130,10 @@ npm run build && rm -r docs && mv dist docs
 Let's test it...
 
 # Drag-n-Drop a NuttX App for Ox64 BL808
+
+Read the article...
+
+-   ["(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way"](https://lupyuen.github.io/articles/quickjs2)
 
 Click this link: https://lupyuen.github.io/nuttx-blockly/
 
@@ -207,6 +227,10 @@ function send_command(cmd) {
 ```
 
 # Drag-n-Drop a NuttX App to a Real Ox64 BL808 SBC
+
+Read the article...
+
+-   ["(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way"](https://lupyuen.github.io/articles/quickjs2)
 
 From NuttX Emulator to a Real NuttX Device! Click this link: https://lupyuen.github.io/nuttx-blockly/
 
@@ -371,6 +395,10 @@ More about the Web Serial API...
 
 # Connect to Ox64 BL808 SBC via Web Serial API
 
+Read the article...
+
+-   ["(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way"](https://lupyuen.github.io/articles/quickjs2)
+
 Let's connect to Ox64 BL808 SBC in our Web Browser via the Web Serial API...
 
 - [Web Serial API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Serial_API)
@@ -447,6 +475,10 @@ nsh>
 
 # Send a Command to Ox64 BL808 SBC via Web Serial API
 
+Read the article...
+
+-   ["(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way"](https://lupyuen.github.io/articles/quickjs2)
+
 This is how we send a command to Ox64 BL808 SBC via Web Serial API: [jslinux.js](https://github.com/lupyuen/nuttx-tinyemu/commit/1384db4edb398f6cb65718766af67dc1aa88bcb0)
 
 ```javascript
@@ -486,6 +518,10 @@ qjs >
 ```
 
 # Load the Blocks for a Blockly App
+
+Read the article...
+
+-   ["(Homage to MakeCode) Coding Ox64 BL808 SBC the Drag-n-Drop Way"](https://lupyuen.github.io/articles/quickjs2)
 
 This is how we load the Blocks for a Blockly App: [index.ts](https://github.com/lupyuen/nuttx-blockly/blob/main/src/index.ts#L100-L120)
 
